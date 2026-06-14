@@ -11,7 +11,7 @@ document.getElementById("rollButton").addEventListener("click", event => {
     setTimeout(() => {
         dieImages.forEach((image) => {
             if(isDieUnlocked(image)) {
-                image.src = "assets/white_dice_" + (Math.floor(Math.random() * 5) + 1) + ".gif";
+                image.src = "assets/white_dice_" + (Math.floor(Math.random() * 6) + 1) + ".gif";
             }
         })
         // console.log(Math.floor(Math.random() * 5) + 1)
@@ -21,8 +21,6 @@ document.getElementById("rollButton").addEventListener("click", event => {
 });
 
 function isDieUnlocked(dieImage) {
-    const checkboxes = document.querySelectorAll("#gameboard input");
-    const unchecked = Array.from(checkboxes).filter(checkbox => !checkbox.checked);
-
-    return unchecked.find(checkbox => checkbox.className === dieImages.className);
+    const checkbox = document.querySelector(`#gameboard input.${dieImage.className}`);
+    return checkbox ? !checkbox.checked : false;
 }
